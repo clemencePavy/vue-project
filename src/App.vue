@@ -18,7 +18,7 @@
       id: Math.random().toString(36).substring(2),
       content: trimmedText.value,
       createdAt: new Date(),
-      likes: 0,
+      liked: 0,
       autor: {
         username: "Clem",
         avatarUrl: "https://media1.tenor.com/m/a5RGfluwSOgAAAAd/sylvian-delhoumi.gif"
@@ -33,6 +33,11 @@
 
   function deletePost(id) {
     posts.value = posts.value.filter( (post) => post.id !== id );
+  }
+
+  function likePost(id) {
+    const postToUpdate = post.value.find((post) => post.id == id);
+    postToUpdate.liked = 
   }
 
 </script>

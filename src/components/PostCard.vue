@@ -20,14 +20,15 @@
     }
 
     function likePost() {
-        if(isLiked) {
+       /* if(isLiked) {
             isLiked = false;
             emit("like", false);
         }
         else {
             isLiked = true;
             emit("like", true);
-        }
+        }*/
+        emit("like", props.post.id);
     }
 
 </script>
