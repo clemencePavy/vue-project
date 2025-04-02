@@ -16,6 +16,9 @@ const routes = [
         path: "/user/:username",
         name: "user",
         component: UserProfile,
+        meta: {
+            requiresAuth: true
+        }
     },
     {
         path: "/register",
@@ -29,7 +32,7 @@ const router = createRouter({
     routes, /* -> routes: routes (car même nom)*/
 });
 
-router.beforeEach((to, _, next) => {
+router.beforeEach((to, from, next) => {
     if (to.matched.some(record => record.meta.requiresAuth)) {
       const user = JSON.parse(localStorage.getItem('user'));
       if (!user) {
@@ -39,6 +42,16 @@ router.beforeEach((to, _, next) => {
       }
     } else {
       next();
+    }
+  });
+
+  router.beforeEach((to, from, next) => {
+    if(user) {
+      next();
+    }
+
+    if(to.meta.requiresAuth) {
+      return next("/register");
     }
   });
 
